@@ -41,8 +41,7 @@ public class ArrayStorage {
             System.out.println("Резюме с uuid = " + uuid + " удалено");
         }
     }
-
-
+    
     /**
      * @return array, contains only Resumes in storage (without null)
      */
