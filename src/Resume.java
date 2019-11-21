@@ -3,7 +3,7 @@
  */
 public class Resume {
 
-    // Unique identifier
+   // Unique identifier
     String uuid;
 
     public String getUuid() {
