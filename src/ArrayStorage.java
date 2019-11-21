@@ -13,7 +13,7 @@ public class ArrayStorage {
     }
 
     void save(Resume resume) {
-        if (checkExist(resume.getUuid())) {
+        if (getIndex(resume.getUuid()) != -1) {
             System.out.println("Резюме с uuid = " + resume.getUuid() + " уже существует");
         } else if (size == storage.length) {
             System.out.println("Массив заполнен");
@@ -24,11 +24,11 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        if (!checkExist(uuid)) {
+        if (getIndex(uuid) == -1) {
             System.out.println("Резюме с uuid = " + uuid + " не существует");
             return null;
         }
-        return getResume(uuid);
+        return storage[getIndex(uuid)];
     }
 
     void delete(String uuid) {
@@ -42,6 +42,7 @@ public class ArrayStorage {
         }
     }
 
+
     /**
      * @return array, contains only Resumes in storage (without null)
      */
@@ -51,24 +52,6 @@ public class ArrayStorage {
 
     int size() {
         return size;
-    }
-
-    private boolean checkExist(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].getUuid().equals(uuid)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private Resume getResume(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].getUuid().equals(uuid)) {
-                return storage[i];
-            }
-        }
-        return null;
     }
 
     private int getIndex(String uuid) {
