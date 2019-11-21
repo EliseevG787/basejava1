@@ -24,24 +24,26 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        if (getIndex(uuid) == -1) {
+        int i = getIndex(uuid);
+        if (i == -1) {
             System.out.println("Резюме с uuid = " + uuid + " не существует");
             return null;
         }
-        return storage[getIndex(uuid)];
+        return storage[i];
     }
 
     void delete(String uuid) {
-        if (getIndex(uuid) == -1) {
+        int i = getIndex(uuid);
+        if (i == -1) {
             System.out.println("Резюме с uuid = " + uuid + " не существует");
         } else {
-            storage[getIndex(uuid)] = storage[size - 1];
+            storage[i] = storage[size - 1];
             storage[size - 1] = null;
             size--;
             System.out.println("Резюме с uuid = " + uuid + " удалено");
         }
     }
-    
+
     /**
      * @return array, contains only Resumes in storage (without null)
      */
