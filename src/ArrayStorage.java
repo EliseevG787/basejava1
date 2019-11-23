@@ -4,15 +4,24 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
-    int size = 0;
+    private int size = 0;
+    private Resume[] storage = new Resume[10000];
 
-    void clear() {
+    public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
-    void save(Resume resume) {
+    void update(Resume resume) {
+        int i = getIndex(resume.getUuid());
+        if (i == -1) {
+            System.out.println("Резюме с uuid = " + resume.getUuid() + " не существует");
+        } else {
+            storage[i] = resume;
+        }
+    }
+
+    public void save(Resume resume) {
         if (getIndex(resume.getUuid()) != -1) {
             System.out.println("Резюме с uuid = " + resume.getUuid() + " уже существует");
         } else if (size == storage.length) {
@@ -23,7 +32,7 @@ public class ArrayStorage {
         }
     }
 
-    Resume get(String uuid) {
+    public Resume get(String uuid) {
         int i = getIndex(uuid);
         if (i == -1) {
             System.out.println("Резюме с uuid = " + uuid + " не существует");
@@ -32,7 +41,7 @@ public class ArrayStorage {
         return storage[i];
     }
 
-    void delete(String uuid) {
+    public void delete(String uuid) {
         int i = getIndex(uuid);
         if (i == -1) {
             System.out.println("Резюме с uuid = " + uuid + " не существует");
@@ -44,14 +53,15 @@ public class ArrayStorage {
         }
     }
 
+
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    Resume[] getAll() {
+    public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }
 
-    int size() {
+    public int size() {
         return size;
     }
 
