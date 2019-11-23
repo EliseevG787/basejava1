@@ -1,3 +1,7 @@
+package com.urise.webapp.storage;
+
+import com.urise.webapp.model.Resume;
+
 import java.util.Arrays;
 
 /**
@@ -12,7 +16,7 @@ public class ArrayStorage {
         size = 0;
     }
 
-    void update(Resume resume) {
+   public void update(Resume resume) {
         int i = getIndex(resume.getUuid());
         if (i == -1) {
             System.out.println("Резюме с uuid = " + resume.getUuid() + " не существует");
