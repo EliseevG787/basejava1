@@ -22,7 +22,6 @@ public class ArrayStorage {
             System.out.println("Резюме с uuid = " + resume.getUuid() + " не существует");
         } else {
             storage[i] = resume;
-            System.out.println("Резюме с uuid = " + resume.getUuid() + " обновлено");
         }
     }
 
