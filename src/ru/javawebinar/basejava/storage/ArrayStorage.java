@@ -13,5 +13,15 @@ public class ArrayStorage extends AbstractArrayStorage {
         }
         return -1;
     }
+
+    @Override
+    protected void fillArray(int index) {
+        storage[index] = storage[size - 1];
+    }
+
+    @Override
+    protected void sortArray() {
+
+    }
 }
 

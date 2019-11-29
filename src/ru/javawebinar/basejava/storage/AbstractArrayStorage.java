@@ -35,6 +35,8 @@ public abstract class AbstractArrayStorage implements Storage {
         } else {
             storage[size] = resume;
             size++;
+
+            sortArray();
         }
     }
 
@@ -56,7 +58,9 @@ public abstract class AbstractArrayStorage implements Storage {
         if (index < 0) {
             System.out.println("Resume " + uuid + " not exist");
         } else {
-            storage[index] = storage[size - 1];
+
+            fillArray(index);
+
             storage[size - 1] = null;
             size--;
         }
@@ -67,5 +71,7 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     protected abstract int getIndex(String uuid);
+    protected abstract void fillArray(int index);
+    protected abstract void sortArray();
 }
 
