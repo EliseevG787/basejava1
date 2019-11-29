@@ -19,14 +19,10 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected void sortArray() {
-        int index = Arrays.binarySearch(storage, 0, size, storage[size - 1]);
-        if (index < 0) {
-            index = -(index) - 1;
-            System.arraycopy(storage, index, storage, index + 1, size - index);
-            storage[index] = storage[size];
-            storage[size] = null;
-        }
+    protected void insert(Resume resume, int index) {
+        index = -index - 1;
+        System.arraycopy(storage, index, storage, index + 1, size - index);
+        storage[index] = resume;
     }
 }
 
