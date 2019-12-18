@@ -27,21 +27,24 @@ public abstract class AbstractStorage implements Storage {
     }
 
 
-    private Integer NotExistResume(String uuid) {
+    public Integer NotExistResume(String uuid) {
         Integer index = getIndex(uuid);
-        if (index == null) {
+        if (!ExistIndex(index)) {
             throw new NotExistStorageException(uuid);
         }
         return index;
     }
 
-    private Integer ExistResume(String uuid) {
+    public Integer ExistResume(String uuid) {
         Integer index = getIndex(uuid);
-        if (index != null) {
+        if (ExistIndex(index)) {
             throw new ExistStorageException(uuid);
         }
         return index;
     }
+
+
+    protected abstract boolean ExistIndex(Integer index);
 
     protected abstract Integer getIndex(String uuid);
 
