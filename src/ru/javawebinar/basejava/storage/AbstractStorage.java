@@ -7,45 +7,49 @@ import ru.javawebinar.basejava.model.Resume;
 public abstract class AbstractStorage implements Storage {
 
     public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
-        return getRes(index);
+        Integer index = NotExistResume(uuid);
+        return getResume(index);
     }
 
     public void delete(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
+        Integer index = NotExistResume(uuid);
+        deleteResume(index);
+    }
+
+    public void update(Resume resume) {
+        Integer index = NotExistResume(resume.getUuid());
+        updateResume(index, resume);
+    }
+
+    public void save(Resume resume) {
+        Integer index = ExistResume(resume.getUuid());
+        saveResume(resume, index);
+    }
+
+
+    private Integer NotExistResume(String uuid) {
+        Integer index = getIndex(uuid);
+        if (index == null) {
             throw new NotExistStorageException(uuid);
         }
-        delRes(index);
+        return index;
     }
 
-    public void update(Resume r) {
-        int index = getIndex(r.getUuid());
-        if (index < 0) {
-            throw new NotExistStorageException(r.getUuid());
+    private Integer ExistResume(String uuid) {
+        Integer index = getIndex(uuid);
+        if (index != null) {
+            throw new ExistStorageException(uuid);
         }
-        setRes(index, r);
+        return index;
     }
 
-    public void save(Resume r) {
-        int index = getIndex(r.getUuid());
-        if (index >= 0) {
-            throw new ExistStorageException(r.getUuid());
-        }
-        saveRes(r);
-    }
+    protected abstract Integer getIndex(String uuid);
 
+    protected abstract Resume getResume(Integer index);
 
-    protected abstract int getIndex(String uuid);
+    protected abstract void deleteResume(Integer index);
 
-    protected abstract Resume getRes(int index);
+    protected abstract void updateResume(Integer index, Resume resume);
 
-    protected abstract void delRes(int index);
-
-    protected abstract void setRes(int index, Resume r);
-
-    protected abstract void saveRes(Resume r);
+    protected abstract void saveResume(Resume resume, Integer index);
 }
