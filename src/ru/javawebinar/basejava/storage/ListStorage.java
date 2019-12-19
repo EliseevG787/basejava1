@@ -3,10 +3,11 @@ package ru.javawebinar.basejava.storage;
 import ru.javawebinar.basejava.model.Resume;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListStorage extends AbstractStorage {
 
-    private ArrayList<Resume> storage = new ArrayList<>();
+    private List<Resume> storage = new ArrayList<>();
 
     @Override
     public void clear() {
@@ -55,7 +56,7 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected boolean ExistIndex(Integer index) {
+    protected boolean isExistIndex(Integer index) {
         return index != null;
     }
 }
